@@ -45,6 +45,6 @@ input_list = [create_input(descriptive_label) for descriptive_label in descripti
 solution_button = tkinter.Button(text="Solução!")
 solution_button.grid(column=mainColumn + 2, row=mainRow + 4)
 
-# ---------------------------- CheckBoxes------------------------------- #
-# Start the program
+# ---------------------------- CheckBoxes ------------------------------- #
+# ---------------------------- Start the program ------------------------------ #
 window.mainloop()

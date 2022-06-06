@@ -1,3 +1,4 @@
+# ---------------------------- Functions ------------------------------ #
 import tkinter
 
 STANDARD_FONT = ("Arial", 10)
