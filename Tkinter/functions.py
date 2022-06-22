@@ -26,3 +26,9 @@ def create_input(descriptive_label):
     new_input = tkinter.Entry(width=15)
     new_input.grid(column=descriptive_label.grid_info()["column"] + 1, row=descriptive_label.grid_info()["row"])
     return new_input
+
+
+def create_check_boxes(descriptive_label):
+    new_check_box = tkinter.Checkbutton()
+    new_check_box.grid(column=descriptive_label.grid_info()["column"] - 1, row=descriptive_label.grid_info()["row"])
+    return new_check_box
