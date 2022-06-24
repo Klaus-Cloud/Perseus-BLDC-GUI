@@ -2,6 +2,7 @@ import tkinter
 from functions import *
 from PIL import Image, ImageTk
 import json
+
 STANDARD_FONT = ("Arial", 10)
 mainRow = 0
 mainColumn = 0
@@ -31,8 +32,8 @@ canvas2.grid(column=mainColumn + 4, row=mainRow + 12)
 position_lists = [["toInput", "AWG:", STANDARD_FONT, mainColumn, mainRow + 1],
                   ["toInput", "Corrente(A):", STANDARD_FONT, mainColumn, mainRow + 2],
                   ["toInput", "ke:", STANDARD_FONT, mainColumn, mainRow + 3],
-                  ["toCheckBox", "Usar valor anterior", ("Arial", 7), mainColumn + 1, mainRow + 4],
-                  ["toInput", "Medidas(mm):", STANDARD_FONT, mainColumn, mainRow + 5],
+                  ["toCheckBox", "Usar valor de ke anterior", ("Arial", 7), mainColumn + 1, mainRow + 4],
+                  ["Empty", "Medidas(mm):", STANDARD_FONT, mainColumn, mainRow + 5],
                   ["toCheckBox", "Usar medidas anteriores", ("Arial", 7), mainColumn + 1, mainRow + 6],
                   ["toInput", "a:", STANDARD_FONT, mainColumn, mainRow + 7],
                   ["toInput", "b:", STANDARD_FONT, mainColumn, mainRow + 8],
@@ -68,8 +69,18 @@ check_box_list = [create_check_boxes(descriptive_label) for descriptive_label in
 with open("tabelaAWG.json", 'r') as file:
     # Writing New file
     file_data= json.load(file)
+
 file_data_dict = json.loads(file_data)
 k_e_motor = 0.002007 # Valor medido no laboratório
+
+# ----------------------------- Check Boxes actions ------------------------------ #
+k_e_check_box = tkinter.IntVar()
+engine_dimensions_check_box =tkinter.IntVar()
+
+check_box_list[0].config(variable=k_e_check_box, onvalue=1, offvalue=0,
+                         command= lambda :check_box_clicked(k_e_check_box, input_list, k_e_motor, engine_dimensions_check_box))
+check_box_list[1].config(variable=engine_dimensions_check_box, onvalue=1, offvalue=0,
+                         command= lambda :check_box_clicked(k_e_check_box, input_list, k_e_motor, engine_dimensions_check_box))
 
 
 # ---------------------------- Start the program ------------------------------ #
