@@ -1,4 +1,4 @@
-import tkinter
+from tkinter import messagebox
 from functions import *
 from PIL import Image, ImageTk
 import json
@@ -56,32 +56,33 @@ answer_label_list = [create_answer_label(descriptive_label) for descriptive_labe
 input_list = [create_input(descriptive_label) for descriptive_label in descriptive_labels_list if
               descriptive_label.model == "toInput"]
 
-# ---------------------------- Buttons ------------------------------- #
-solution_button = tkinter.Button(text="Solução!")
-solution_button.grid(column=mainColumn + 3, row=mainRow + 4)
-
 # ---------------------------- CheckBoxes ------------------------------- #
 check_box_list = [create_check_boxes(descriptive_label) for descriptive_label in descriptive_labels_list if
                   descriptive_label.model == "toCheckBox"]
 
-
-# ---------------------------- Data files ------------------------------- #
+# ---------------------------- Data file ------------------------------- #
 with open("tabelaAWG.json", 'r') as file:
     # Writing New file
-    file_data= json.load(file)
+    file_data = json.load(file)
 
 file_data_dict = json.loads(file_data)
-k_e_motor = 0.002007 # Valor medido no laboratório
+k_e_motor = 0.002007  # Valor medido no laboratório
 
 # ----------------------------- Check Boxes actions ------------------------------ #
 k_e_check_box = tkinter.IntVar()
-engine_dimensions_check_box =tkinter.IntVar()
+engine_dimensions_check_box = tkinter.IntVar()
 
 check_box_list[0].config(variable=k_e_check_box, onvalue=1, offvalue=0,
-                         command= lambda :check_box_clicked(k_e_check_box, input_list, k_e_motor, engine_dimensions_check_box))
+                         command=lambda: check_box_clicked(k_e_check_box,
+                                                           input_list, k_e_motor, engine_dimensions_check_box))
 check_box_list[1].config(variable=engine_dimensions_check_box, onvalue=1, offvalue=0,
-                         command= lambda :check_box_clicked(k_e_check_box, input_list, k_e_motor, engine_dimensions_check_box))
+                         command=lambda: check_box_clicked(k_e_check_box,
+                                                           input_list, k_e_motor, engine_dimensions_check_box))
+# ---------------------------- Buttons ------------------------------- #
 
+solution_button = tkinter.Button(text="Solução!", command=lambda: get_inputs(input_list, k_e_motor,
+                                                                             file_data_dict, answer_label_list))
+solution_button.grid(column=mainColumn + 3, row=mainRow + 4)
 
 # ---------------------------- Start the program ------------------------------ #
 window.mainloop()
