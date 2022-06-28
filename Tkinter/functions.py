@@ -71,19 +71,20 @@ def check_box_clicked(k_e_check_box, input_list, k_e_motor, engine_dimensions_ch
 
 def get_inputs(input_list, k_e_motor, file_data_dict, answer_label_list):
     # ----------------------------- Input Process ------------------------------ #
-    desired_input_list = [float(input.get()) for input in input_list
+    desired_input_list = [input.get() for input in input_list
                           if input.name in ["AWG:", "Corrente(A):", "Torque desejado:", "a:", "b:", "c:", "d:", "e:"]]
-    if "" in desired_input_list:
+    if '' in desired_input_list:
         messagebox.showerror(title="Erro", message="Sem valor atribuido as entradas")
     else:
-        AWG_Cable = desired_input_list[0]
-        I_rms_motor = desired_input_list[1]
-        T_Desejado = desired_input_list[2]
-        a_dim_motor = desired_input_list[3] * 0.001
-        b_dim_motor = desired_input_list[4] * 0.001
-        c_dim_motor = desired_input_list[5] * 0.001
-        d_dim_motor = desired_input_list[6] * 0.001
-        e_dim_motor = desired_input_list[7] * 0.001
+        desired_input_list_float = [float(input) for input in desired_input_list ]
+        AWG_Cable = desired_input_list_float[0]
+        I_rms_motor = desired_input_list_float[1]
+        T_Desejado = desired_input_list_float[2]
+        a_dim_motor = desired_input_list_float[3] * 0.001
+        b_dim_motor = desired_input_list_float[4] * 0.001
+        c_dim_motor = desired_input_list_float[5] * 0.001
+        d_dim_motor = desired_input_list_float[6] * 0.001
+        e_dim_motor = desired_input_list_float[7] * 0.001
         # ----------------------------- Equations ------------------------------ #
         N_antigo = 10  # Numero de voltas usado pelo Warthog antes do estudo
         N_imas = 16  # Numero de imas
